@@ -14,23 +14,26 @@ import {
     Divider,
 } from 'react-native-paper';
 
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
-
-const Messages = () => {
+const Messages = (props) => {
+    console.log(props.data._id);
     return (
         <Card>
-            <Divider />
+            {/* <Divider /> */}
             <TouchableRipple
-                onPress={() => {alert('rohn')}}
+                onPress={() => { alert(props.data.body) }}
                 rippleColor="rgba(0, 0, 0, .32)"
             >
-                <Card.Title
-                    title="700 2098889"
-                    subtitle="This is demo Message..."
-                    left={(props) => <Avatar.Icon {...props} style={{ backgroundColor: 'grey', }} icon="message" />}
-                    right={(props) => <Text style={{ marginRight: 16, color: 'red', fontSize: 12 }} >spam</Text>}
+                <Card.Title titleStyle={{ color: "grey",fontWeight:'bold',  marginLeft:0  }}
+                    title={props.data.address}
+                    subtitle={props.data.body}
+                    // left={(props) => <Icon {...props} size={30} style={{ paddingLeft:7, paddingTop:4, color: '#F32013',backgroundColor:'#b5b3b3',  borderRadius:50, height:40, width:40}} name="exclamation-circle" />}
+                    right={(props) => <Icon {...props} size={30} style={{ marginRight:8 , paddingLeft:0, paddingTop:4, color: '#F32013',  borderRadius:50, height:40, width:40}} name="exclamation-circle" />}
+                    
                 />
             </TouchableRipple>
+            {/* <Icon name="exclamation" size={30} color="#900" /> */}
         </Card>
     );
 }

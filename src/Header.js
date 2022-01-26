@@ -18,7 +18,7 @@ import {
     render() {
       return (
         <Appbar.Header >
-       <Appbar.Content title="Spam Detector" color="#000"  />
+       <Appbar.Content titleStyle={{fontWeight:'bold', color:'#262424'}} title="Spam Detector" color="#000"  />
         {/* <Appbar.Action icon="magnify" color="#fff" onPress={() => {}} /> */}
         <Appbar.Action icon={MORE_ICON} color="#000" onPress={() => {}} />
     </Appbar.Header>
