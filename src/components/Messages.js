@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import {View, Text, Image, Touchable} from 'react-native';
 import {
   Card,
@@ -14,7 +14,46 @@ import {
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
 const Messages = props => {
+  const [abc, setAbc] = useState();
+
+  useEffect(() => {
+    let mounted = true;
+
+    const fetchOrders = () => {
+      var date = new Date().toLocaleString('en-US');
+      console.log(date);
+      var messageDate = new Date(props.data.date).toLocaleString('en-US');
+      console.log(messageDate);
+      if (messageDate.slice(8, 10) == date.slice(8, 10)) {
+        console.log('26 = ' + messageDate.slice(11, 16));
+        setAbc(messageDate.slice(11, 16));
+      } else if (
+        messageDate.slice(8, 10) < date.slice(8, 10) ||
+        messageDate.slice(4, 7) < date.slice(4, 7)
+      ) {
+        console.log(
+          '31 = ' + messageDate.slice(8, 10) + messageDate.slice(4, 7),
+        );
+        setAbc(messageDate.slice(4, 10));
+      } else if (messageDate.slice(20, 24) == date.slice(20, 24)) {
+        console.log(
+          '33 = ',
+          messageDate.slice(4, 7) + messageDate.slice(20, 24),
+        );
+        setAbc(messageDate.slice(4, 7) + messageDate.slice(20, 24));
+      }
+    };
+
+    fetchOrders();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+  console.log('1 = ', abc);
+
   console.log(props.data._id);
+
   return (
     <Card>
       {/* <Divider /> */}
@@ -45,7 +84,11 @@ const Messages = props => {
               name="exclamation-circle"
             />
           )}
-          right={props => <Text style={{marginRight: 15}}>5:50</Text>}
+          right={props => (
+            <Text {...props} style={{marginRight: 10, fontSize: 12}}>
+              {abc}
+            </Text>
+          )}
         />
       </TouchableRipple>
       {/* <Icon name="exclamation" size={30} color="#900" /> */}
